@@ -72,7 +72,7 @@ module.exports = (app, db, collection) => {
   });
 
   app.put('/notes/:id', (req, res) => {
-    const query = { _id: new ObjectID(req.params.id) };
+    const query = { _id: new mongodb.ObjectID(req.params.id) };
 
     const note = {
       text: req.body.body,
