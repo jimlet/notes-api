@@ -1,12 +1,12 @@
 // This is a helper function for creating ObjectID objects for Mongo.
 // Mongo won't accept strings as ID params.
-const ObjectID = require('mongodb').ObjectID;
+const mongodb = require('mongodb');
 
 module.exports = (app, db, collection) => {
   app.get('/notes/:id', (req, res) => {
     // Note the ":" syntax here - params prefixed with : in the
     // URI are available by name in the req.params collection
-    const query = { _id: new ObjectID(req.params.id) };
+    const query = { _id: new mongodb.ObjectID(req.params.id) };
 
     db
       .collection(collection)
@@ -50,7 +50,7 @@ module.exports = (app, db, collection) => {
   });
 
   app.delete('/notes/:id', (req, res) => {
-    const query = { _id: new ObjectID(req.params.id) };
+    const query = { _id: new mongodb.ObjectID(req.params.id) };
 
     db
       .collection(collection)
