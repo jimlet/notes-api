@@ -1,5 +1,5 @@
-const appConfig = require('./config/app');
-const dbConfig = require('./config/db');
+require('dotenv').config();
+
 const express = require('express');
 const routes = require('./app/routes');
 const mongodb = require('mongodb');
@@ -33,14 +33,14 @@ app.use(bodyParser.json());
 // });
 
 // Create the db connection and hand it in to the app.
-mongodb.MongoClient.connect(dbConfig.url)
+mongodb.MongoClient.connect(process.env.DB_URL)
   .then((client) => {
     // Set up routes.
-    routes(app, client.db(dbConfig.database), dbConfig.collection);
+    routes(app, client.db(process.env.DB_NAME), process.env.DB_COLLECTION);
 
     // Start the app.
-    app.listen(appConfig.port, () => {
-      console.log(`We are live on port ${appConfig.port}`);
+    app.listen(process.env.PORT, () => {
+      console.log(`We are live on port ${process.env.PORT}`);
     });
   })
   .catch((err) => {
