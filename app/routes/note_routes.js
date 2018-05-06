@@ -79,11 +79,19 @@ module.exports = (app, db, collection) => {
       title: req.body.title,
     };
 
+    const noteOperation = {
+      $set: { ...note },
+    };
+
     db
       .collection(collection)
-      .update(query, note)
+      .updateOne(query, noteOperation)
       .then((result) => {
-        res.send(note);
+        if (result.matchedCount === 1) {
+          res.send(note);
+        } else {
+          res.status(404).send('Not found');
+        }
       })
       .catch((err) => {
         res.status(500).send({ error: `An error has occured: ${err}` });
