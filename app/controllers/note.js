@@ -1,8 +1,8 @@
-const Note = require('../../models/note.js');
+const NoteModel = require('../../models/note.js');
 
 const NoteController = {
   GetAll(req, res) {
-    Note.find({})
+    NoteModel.find({})
       .then((notes) => {
         if (notes) {
           res.send(notes);
@@ -15,8 +15,8 @@ const NoteController = {
       });
   },
 
-  GetOne(req, res) {
-    Note.findById(req.params.id)
+  GetById(req, res) {
+    NoteModel.findById(req.params.id)
       .then((note) => {
         if (note) {
           res.send(note);
@@ -30,7 +30,7 @@ const NoteController = {
   },
 
   Add(req, res) {
-    new Note(req.body)
+    new NoteModel(req.body)
       .save()
       .then((note) => {
         res.send(note);
@@ -40,8 +40,8 @@ const NoteController = {
       });
   },
 
-  UpdateOne(req, res) {
-    Note.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  UpdateById(req, res) {
+    NoteModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
       .then((updated) => {
         if (updated) {
           res.send(updated);
@@ -54,8 +54,8 @@ const NoteController = {
       });
   },
 
-  DeleteOne(req, res) {
-    Note.findByIdAndRemove({ _id: req.params.id })
+  DeleteById(req, res) {
+    NoteModel.findByIdAndRemove({ _id: req.params.id })
       .then((removed) => {
         if (removed) {
           res.send(`Note ${req.params.id} deleted.`);
