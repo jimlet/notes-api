@@ -6,11 +6,11 @@ const { expect } = chai;
 // to.be.true becomes to.be.true() and ESLint is happy.
 chai.use(dirtyChai);
 
-const NoteModel = require('../../models/note');
+const SUT = require('../../models/note');
 
 describe('note', () => {
   it('should be invalid if body is empty', (done) => {
-    const note = new NoteModel();
+    const note = new SUT();
     note.validate((err) => {
       expect(err.errors.body).to.exist();
       done();
@@ -20,7 +20,7 @@ describe('note', () => {
 
 describe('note', () => {
   it('should be invalid if title is empty', (done) => {
-    const note = new NoteModel();
+    const note = new SUT();
     note.validate((err) => {
       expect(err.errors.title).to.exist();
       done();
