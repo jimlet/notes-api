@@ -1,0 +1,12 @@
+node_modules/
+.git/
+coverage/
+.vscode/
+.dockerignore
+Dockerfile
+.env
+*.eslintrc
+.gitignore
+README.md
+*.code-workspace
+*.DS_Store
