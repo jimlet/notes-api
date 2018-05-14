@@ -10,3 +10,4 @@ ADD . /opt/app
 EXPOSE 8000
 
 CMD ["npm", "start"]
+# CMD ["/bin/sh"]
